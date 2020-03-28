@@ -106,7 +106,7 @@ public class BackgroundLocationUpdateService
     private Boolean isDebugging;
     private String notificationTitle = "Background checking";
     private String notificationText = "ENABLED";
-    private String APOMAP_1 = "APOMAP_CHANNEL";
+    private String BACKGROUND_CHANNEL = "BACKGROUND_CHANNEL";
 
     private Boolean useActivityDetection = false;
 
@@ -192,7 +192,7 @@ public class BackgroundLocationUpdateService
             Context context = getApplicationContext();
             createNotificationChannels();
 
-            Notification.Builder builder = new Notification.Builder(this,APOMAP_1);
+            Notification.Builder builder = new Notification.Builder(this,BACKGROUND_CHANNEL);
             builder.setContentTitle(notificationTitle);
             builder.setContentText(notificationText);
             builder.setSmallIcon(context.getApplicationInfo().icon);
@@ -262,8 +262,8 @@ public class BackgroundLocationUpdateService
             // CharSequence name = getString(R.string.channel_name);
             // String description = getString(R.string.channel_description);
             // int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(APOMAP_1, "apomap", notificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("Apomaps Benachrichtigungskanal");
+            NotificationChannel channel = new NotificationChannel(BACKGROUND_CHANNEL, "background", notificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Notificationchannel for Backgroundservices");
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
