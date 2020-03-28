@@ -105,6 +105,7 @@ public class BackgroundLocationUpdateService
     private Boolean isDebugging;
     private String notificationTitle = "Background checking";
     private String notificationText = "ENABLED";
+    private String APOMAP_1 = "APOMAP_CHANNEL";
 
     private Boolean useActivityDetection = false;
 
