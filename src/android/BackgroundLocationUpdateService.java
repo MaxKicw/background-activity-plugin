@@ -105,6 +105,7 @@ public class BackgroundLocationUpdateService
     private Boolean isDebugging;
     private String notificationTitle = "Background checking";
     private String notificationText = "ENABLED";
+
     private Boolean useActivityDetection = false;
 
     private Boolean stopOnTerminate;
@@ -186,8 +187,9 @@ public class BackgroundLocationUpdateService
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, main,  PendingIntent.FLAG_UPDATE_CURRENT);
 
             Context context = getApplicationContext();
+            createNotificationChannels();
 
-            Notification.Builder builder = new Notification.Builder(this);
+            Notification.Builder builder = new Notification.Builder(this,APOMAP_1);
             builder.setContentTitle(notificationTitle);
             builder.setContentText(notificationText);
             builder.setSmallIcon(context.getApplicationInfo().icon);
@@ -249,6 +251,21 @@ public class BackgroundLocationUpdateService
 
         //We want this service to continue running until it is explicitly stopped
         return START_REDELIVER_INTENT;
+    }
+
+    //Create a notification channel (API26+)
+    private void createNotificationChannels(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // CharSequence name = getString(R.string.channel_name);
+            // String description = getString(R.string.channel_description);
+            // int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(APOMAP_1, "apomap", notificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Apomaps Benachrichtigungskanal");
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     //Receivers for setting the plugin to a certain state
